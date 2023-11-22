@@ -21,11 +21,10 @@ const fetchPokemon = async (pokemon) => {
 const renderPokemon = async (pokemon) => {
   pokemonName.innerHTML = "Carregando...";
   pokemonNumber.innerHTML = "";
-
+  pokemonImage.src = "./images/loading.gif";
   const data = await fetchPokemon(pokemon);
 
   if (data) {
-    pokemonImage.style.display = "block";
     pokemonName.innerHTML = data.name;
     pokemonNumber.innerHTML = data.id;
     pokemonImage.src =
@@ -35,7 +34,7 @@ const renderPokemon = async (pokemon) => {
     input.value = "";
     searchPokemon = data.id;
   } else {
-    pokemonImage.style.display = "none";
+    pokemonImage.src = "./images/pikachu-sleep.png";
     pokemonName.innerHTML = "Não encontrado :c";
     pokemonNumber.innerHTML = "";
   }
@@ -43,7 +42,7 @@ const renderPokemon = async (pokemon) => {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  renderPokemon(input.value.toLowerCase());
+  renderPokemon(input.value.toLowerCase().trim());
 });
 
 buttonPrev.addEventListener("click", () => {
